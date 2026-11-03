@@ -1,154 +1,215 @@
-# 📊 Projet d'analyse des ventes et commandes
+# 📊 Projet Power BI — Analyse des ventes et des commandes
 
-## 🎯 Objectif du projet pédagogique
+## 📌 Présentation
 
-Ce projet a été réalisé dans un objectif **d'apprentissage et de mise en pratique de Power BI**.
+Ce projet consiste à concevoir un tableau de bord interactif avec Power BI afin d’analyser les ventes et les commandes d’une entreprise.
 
-L'objectif est de mettre en œuvre les différentes étapes nécessaires à la réalisation d'une analyse de données, depuis **l'importation et la préparation des données jusqu'à leur visualisation et leur analyse**.
+Réalisé dans le cadre de mon apprentissage de la Business Intelligence, ce projet me permet de mettre en pratique les principales étapes d’un processus d’analyse de données : préparation, modélisation, création de mesures et visualisation.
 
-Le projet a été réalisé en suivant une formation consacrée à Power BI proposée par la chaîne **Sébastien Daviot – Expertise Data**.
+Il s’agit d’un projet pédagogique réalisé à partir d’un jeu de données fourni dans le cadre d’un atelier de formation Power BI.
 
-Cette formation aborde différentes notions clés de Power BI, notamment :
+## 🎯 Objectif
 
-- la préparation des données ;
-- le nettoyage et la transformation des données ;
-- la modélisation des données ;
-- la création de relations entre les tables ;
-- la création de mesures ;
-- la conception de visualisations ;
-- la construction d'un rapport interactif.
+L’objectif est de transformer des données brutes en informations exploitables grâce à un rapport interactif permettant de suivre l’activité commerciale.
 
-> **Projet pédagogique :** ce projet a été réalisé dans le cadre de mon apprentissage de Power BI. Il ne représente pas une analyse réalisée pour une entreprise réelle.
+Le projet vise notamment à :
+
+- Analyser le chiffre d’affaires et les volumes de ventes.
+- Suivre le nombre de commandes et le montant moyen par commande.
+- Étudier la répartition des ventes par région et par catégorie de produits.
+- Analyser les commandes annulées et leur impact sur les ventes.
+- Explorer les données selon plusieurs critères grâce aux filtres et aux interactions du rapport.
+
+## 📊 Données
+
+Le projet utilise le fichier `sales_2.csv`, fourni dans le cadre de l’atelier de formation.
+
+[Accéder aux données sur Google Drive](https://drive.google.com/drive/folders/1y3BF2YPVCgtPYa5dvQa6NYdNYq7QC_d-?usp=sharing)
+
+Le jeu de données contient des informations relatives aux :
+
+- Commandes : identifiant, date et statut.
+- Clients : identifiant et nom.
+- Produits : identifiant, nom et catégorie.
+- Régions : identifiant et nom.
+- Ventes : quantités, prix unitaires et montants totaux.
+
+Ces informations permettent d’étudier les ventes selon plusieurs dimensions et d’analyser les commandes annulées.
+
+## 🧹 Préparation des données
+
+La préparation des données est réalisée avec Power Query dans Power BI Desktop.
+
+Les principales opérations prévues dans le processus de préparation sont :
+
+- Importation du fichier CSV.
+- Analyse de la qualité, de la distribution et du profil des colonnes.
+- Vérification et adaptation des types de données.
+- Renommage des colonnes pour améliorer leur lisibilité.
+- Création de tables de référence à partir de la table d’origine.
+- Vérification de la cohérence des identifiants des clients et des produits.
+- Suppression des colonnes devenues inutiles.
+- Préparation de la table de ventes destinée au modèle final.
+
+Les colonnes sont renommées en français afin de faciliter la lecture et la compréhension du modèle.
+
+## 🏗️ Modèle de données
+
+Le modèle de données repose sur une table centrale `Ventes` et trois tables de dimensions :
+
+| Table      | Informations principales                     |
+| ---------- | -------------------------------------------- |
+| `Ventes`   | Commandes, dates, quantités, prix et statuts |
+| `Clients`  | Identifiant et nom du client                 |
+| `Produits` | Identifiant, nom et catégorie du produit     |
+| `Régions`  | Identifiant et nom de la région              |
+
+Cette organisation vise à séparer les informations descriptives des données de vente et à structurer les relations entre les tables.
+
+Les relations sont vérifiées dans la vue Modélisation de Power BI afin de permettre l’analyse des ventes par client, produit, région et période.
+
+## 🧮 Mesures DAX
+
+Les mesures DAX servent à calculer les principaux indicateurs du tableau de bord.
+
+### Indicateurs de suivi des ventes
+
+| Mesure                | Description                    |
+| --------------------- | ------------------------------ |
+| `Total ventes`        | Montant total des ventes       |
+| `Nombre de commandes` | Nombre de commandes distinctes |
+| `Quantité vendue`     | Quantité totale vendue         |
+| `Commande moyenne`    | Montant moyen par commande     |
+
+Les formules utilisées dans l’atelier sont les suivantes :
+
+```dax
+Total ventes =
+SUM(Ventes[Prix total])
+```
+
+```dax
+Nombre de commandes =
+DISTINCTCOUNT(Ventes[Id commande])
+```
+
+```dax
+Quantité vendue =
+SUM(Ventes[Quantité])
+```
+
+```dax
+Commande moyenne =
+DIVIDE([Total ventes], [Nombre de commandes])
+```
+
+### Indicateurs des commandes annulées
+
+Trois mesures complémentaires sont prévues pour analyser les commandes dont le statut est `Cancelled` :
+
+- `Total commandes annulées` : nombre de commandes annulées.
+- `Montant commandes annulées` : montant associé aux commandes annulées.
+- `Pourcentage commandes annulées` : proportion des commandes annulées parmi les commandes comptabilisées.
+
+Ces indicateurs permettent de compléter le suivi des ventes par une analyse spécifique des annulations.
+
+## 📈 Visualisations
+
+La page **Suivi ventes** regroupe les principaux indicateurs et graphiques nécessaires à l’analyse de l’activité commerciale.
+
+Les visualisations prévues comprennent :
+
+- **Cartes KPI** : chiffre d’affaires, nombre de commandes, quantité vendue et commande moyenne.
+- **Graphique temporel** : évolution du chiffre d’affaires et des volumes de ventes.
+- **Graphique en barres horizontales** : comparaison du chiffre d’affaires par région.
+- **Graphique en anneau** : répartition du chiffre d’affaires par catégorie de produits.
+- **Tableau détaillé** : consultation des informations relatives aux commandes.
+
+L’objectif est de présenter une vue synthétique de l’activité tout en permettant d’accéder aux détails nécessaires à l’analyse.
+
+## 🔎 Analyse des commandes annulées
+
+Une seconde page, **Commandes annulées**, est consacrée à l’étude des annulations.
+
+Elle s’appuie sur les indicateurs et visualisations suivants :
+
+- KPI du nombre de commandes annulées, de leur montant et de leur pourcentage.
+- Courbe d’évolution du pourcentage et du nombre de commandes annulées.
+- Histogramme de la répartition des annulations par région.
+- Treemap pour analyser le montant des commandes annulées par catégorie et par produit.
+- Graphique en ruban pour étudier l’évolution trimestrielle des commandes annulées par produit.
+
+Cette page vise à mieux comprendre la répartition des annulations et leur évolution au cours du temps.
+
+## 🎛️ Fonctionnalités interactives
+
+Le rapport prévoit plusieurs fonctionnalités destinées à faciliter l’exploration des données :
+
+- **Filtre de dates** : sélectionner une période d’analyse.
+- **Filtre de statut** : afficher les commandes selon leur statut.
+- **Filtre de région** : analyser les résultats par zone géographique.
+- **Menu de navigation** : passer d’une page du rapport à l’autre.
+- **Info-bulles personnalisées** : afficher des informations complémentaires au survol de certaines visualisations.
+
+Ces fonctionnalités permettent d’explorer les données selon différents critères et d’approfondir l’analyse sans multiplier les graphiques sur les pages principales.
+
+## 🛠️ Technologies utilisées
+
+- **Power BI Desktop** : conception du rapport et modélisation des données.
+- **Power Query** : préparation et transformation des données.
+- **DAX (Data Analysis Expressions)** : création des mesures et indicateurs.
+- **Power BI Service** : publication du rapport en ligne, lorsque cette étape est réalisée.
+
+## 📸 Aperçu du dashboard
+
+Les captures d’écran du rapport seront ajoutées dans cette section afin de présenter les principales pages et visualisations du projet.
+
+### Suivi ventes
+
+\<!-- Ajouter ici une capture d'écran de la page Suivi ventes -->
+![Page d'accueil du rapport Power BI]("Mes visuels"/Mes visuels/{2C81AA30-5299-4BF0-B562-7AC11F48692C}.png)
+
+### Commandes annulées
+
+\<!-- Ajouter ici une capture d'écran de la page Commandes annulées -->
+
+## 🚀 Installation / utilisation
+
+Pour consulter ou reproduire le projet :
+
+1. Installer Power BI Desktop.
+2. Récupérer le fichier `sales_2.csv` à partir de la source indiquée dans la section Données.
+3. Ouvrir le fichier Power BI `.pbix` du projet, lorsqu’il est disponible.
+4. Si nécessaire, mettre à jour le chemin d’accès au fichier CSV dans les paramètres de la source de données.
+5. Actualiser les données.
+6. Explorer les différentes pages du rapport et utiliser les filtres pour analyser les ventes et les commandes annulées.
+
+La consultation du rapport publié dans Power BI Service dépend de son mode de partage et des autorisations d’accès.
+
+## 💡 Principaux enseignements
+
+Ce projet permet de mettre en pratique plusieurs notions importantes de la Business Intelligence :
+
+- L’importance du nettoyage et de la qualité des données avant l’analyse.
+- L’intérêt de structurer les données en tables de dimensions et table de faits.
+- Le rôle des relations dans la cohérence des analyses.
+- L’utilisation de mesures DAX pour construire des indicateurs dynamiques.
+- Le choix de visualisations adaptées aux questions métier.
+- L’intérêt des filtres, de la navigation et des info-bulles pour améliorer l’exploration des données.
+
+Les enseignements métier et les résultats chiffrés seront complétés après validation du rapport final et analyse des données.
+
+## 🔮 Améliorations possibles
+
+Plusieurs évolutions pourront être envisagées dans une version ultérieure :
+
+- Ajouter des indicateurs complémentaires pour approfondir l’analyse commerciale.
+- Comparer les performances entre différentes périodes.
+- Améliorer la présentation des résultats avec des commentaires analytiques.
+- Enrichir le rapport avec de nouvelles visualisations adaptées aux besoins d’analyse.
+- Documenter les résultats observés à partir des données réelles.
+- Améliorer la présentation du projet dans le portfolio avec des captures d’écran et un lien de consultation, si le rapport est publié et partageable.
 
 ---
 
-## 📂 Source des données
-
-Les données utilisées dans ce projet proviennent du jeu de données mis à disposition dans le cadre de la formation.
-
-[Accéder aux données](https://drive.google.com/drive/folders/1y3BF2YPVCgtPYa5dvQa6NYdNYq7QC_d-?usp=sharing)
-
----
-
-## 🛠️ Outils utilisés
-
-### Power BI
-
-Utilisé pour :
-
-- la modélisation des données ;
-- la création des mesures ;
-- la conception du rapport ;
-- la création des visualisations ;
-- l'analyse des données.
-
-### Power Query
-
-Utilisé pour la **préparation et la transformation des données**, notamment :
-
-- le nettoyage des données ;
-- la vérification des types de données ;
-- le renommage des colonnes ;
-- la transformation des données ;
-- la normalisation du modèle ;
-- la création de tables de dimensions.
-
----
-
-# 🔄 Évolution du projet
-
-## 1. Importation et découverte des données
-
-La première étape a consisté à récupérer le jeu de données fourni dans le cadre de la formation, puis à l'importer dans Power BI.
-
-Avant de procéder aux transformations, une phase de découverte des données a été réalisée afin de mieux comprendre :
-
-- la structure du jeu de données ;
-- les différentes variables disponibles ;
-- les valeurs présentes dans les colonnes ;
-- les types de données ;
-- les informations représentées par chaque variable.
-
-Cette étape permet de mieux comprendre les données avant leur transformation et leur utilisation dans le modèle.
-
----
-
-## 2. Vérification et transformation des données
-
-Plusieurs opérations de préparation ont ensuite été réalisées avec Power Query.
-
-### Vérification des types de données
-
-Les types de données des différentes colonnes ont été vérifiés et adaptés lorsque cela était nécessaire.
-
-### Renommage des colonnes
-
-Afin de rendre le modèle plus lisible et plus facilement exploitable, les colonnes ont été renommées en français.
-
-| Colonne d'origine | Nouvelle appellation |
-|---|---|
-| `OrderID` | Id commande |
-| `CustomerID` | Id client |
-| `CompanyName` | Nom client |
-| `ProductID` | Id produit |
-| `ProductName` | Nom produit |
-| `Category` | Catégorie produit |
-| `RegionID` | Id région |
-| `RegionName` | Nom région |
-| `OrderDate` | Date commande |
-| `Quantity` | Quantité |
-| `UnitPrice` | Prix unitaire |
-| `TotalPrice` | Prix total |
-| `OrderStatus` | Statut commande |
-
----
-
-## 3. Normalisation et création des tables de dimensions
-
-Afin d'améliorer la structure du modèle de données, certaines informations ont été séparées dans des tables de dimensions.
-
-### 👤 Table Clients
-
-La table `Clients` contient notamment :
-
-- `Id client`
-- `Nom client`
-
-### 📦 Table Produits
-
-La table `Produits` contient notamment :
-
-- `Id produit`
-- `Nom produit`
-- `Catégorie produit`
-
-### 🌍 Table Régions
-
-La table `Régions` contient notamment :
-
-- `Id région`
-- `Nom région`
-
-Cette organisation permet de séparer les informations descriptives des données liées aux commandes et de construire un modèle de données plus structuré.
-
----
-
-## 📈 Suite du projet
-
-Les étapes suivantes du projet portent sur :
-
-- la mise en place du modèle de données ;
-- la création des relations entre les tables ;
-- la création des mesures DAX ;
-- la création des indicateurs nécessaires à l'analyse ;
-- la conception des différentes visualisations ;
-- la construction du tableau de bord ;
-- l'analyse des résultats.
-
----
-
-## 🎓 Objectif personnel
-
-Ce projet constitue un exercice pratique destiné à **mettre en application les connaissances acquises sur Power BI** et à mieux comprendre l'ensemble du processus de réalisation d'un projet de Business Intelligence :
-
-**Données → Préparation → Modélisation → Analyse → Visualisation**
+**Projet pédagogique réalisé dans le cadre de mon apprentissage de Power BI et de la Business Intelligence.**
