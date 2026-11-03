@@ -166,7 +166,7 @@ Les captures d’écran du rapport seront ajoutées dans cette section afin de p
 
 ### Suivi ventes
 
-![Page Suivi_ventes_part1](Mes%20visuels/Suivi_ventes_part1)
+![Page Suivie_ventes.png](Mes%20visuels/Suivie_ventes.png)
 ![Page Vent1](Mes%20visuels/Vent1)
 
 
