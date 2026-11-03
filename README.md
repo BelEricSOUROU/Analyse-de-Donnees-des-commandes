@@ -166,14 +166,15 @@ Les captures d’écran du rapport seront ajoutées dans cette section afin de p
 
 ### Suivi ventes
 
-![Page d'accueil du rapport Power BI](![Page Commandes annulées](Mes%20visuels/Suivi_ventes_part1))
+(![Page Commandes annulées](Mes%20visuels/Suivi_ventes_part1)
 ![Page Commandes annulées](Mes%20visuels/Vent1)
 
 
 
 ### Commandes annulées
+![Page Commandes annulées](Mes%20visuels/Commandes_annule.png)
+![Page Commandes annulées](Mes%20visuels/Commandes_annule)
 
-\<!-- Ajouter ici une capture d'écran de la page Commandes annulées -->
 
 ## 🚀 Installation / utilisation
 
