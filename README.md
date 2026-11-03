@@ -167,7 +167,7 @@ Les captures d’écran du rapport seront ajoutées dans cette section afin de p
 ### Suivi ventes
 
 \<!-- Ajouter ici une capture d'écran de la page Suivi ventes -->
-![Page d'accueil du rapport Power BI](Mes visuels/{2C81AA30-5299-4BF0-B562-7AC11F48692C}.png)
+![Page d'accueil du rapport Power BI](../Mes visuels/{2C81AA30-5299-4BF0-B562-7AC11F48692C}.png)
 
 ### Commandes annulées
 
