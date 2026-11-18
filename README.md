@@ -167,14 +167,14 @@ Les captures d’écran du rapport seront ajoutées dans cette section afin de p
 ### Suivi ventes
 
 ![Page Suivie_ventes.png](Mes%20visuels/Suivie_ventes.png)
-![Page Vent1](Mes%20visuels/Vent1)
+![Page Vent1](Mes%20visuels/Suivi_vente_filtreStatus.png)
 
 
 
 ### Commandes annulées
 
 ![Page Commande_annule.png](Mes%20visuels/Commande_annule.png)
-![Page Commandes annulées](Mes%20visuels/Commandes_annule)
+![Page Commandes annulées](Mes%20visuels/Commandes_annule.png)
 
 ## Présentation d'info-bull
 
